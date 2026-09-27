@@ -608,86 +608,114 @@ async function kirimFrameKeServer(frame) {
 function mulaiLive() {
 
   if (liveTimer) {
-
-    clearInterval(
-      liveTimer
-    );
-
+    clearInterval(liveTimer);
   }
 
-  liveTimer =
-    setInterval(
-      function() {
+  liveTimer = setInterval(
+    function() {
 
-        if (!stream) {
-          return;
-        }
+      if (!stream) {
+        return;
+      }
 
-        const frame =
-          buatFrameLive();
+      if (
+        !video.videoWidth ||
+        !video.videoHeight
+      ) {
+        return;
+      }
 
-        if (!frame) {
-          return;
-        }
 
-        /*
-         * Jika Dashboard masih satu browser
-         * dengan kamera, tampilkan langsung juga.
-         */
-        if (
-          window.opener &&
-          !window.opener.closed
-        ) {
+      /* ===============================
+         UKURAN LIVE KECIL
+      =============================== */
 
-          try {
+      const width = 480;
 
-            window.opener.postMessage(
-              {
-                type:
-                  "KAMERA_LIVE_FRAME",
-
-                frame:
-                  frame,
-
-                latitude:
-                  LATITUDE,
-
-                longitude:
-                  LONGITUDE,
-
-                time:
-                  Date.now()
-              },
-              "*"
-            );
-
-          }
-
-          catch (error) {
-
-            console.log(
-              "postMessage:",
-              error
-            );
-
-          }
-
-        }
-
-        /*
-         * Jalur utama untuk beda laptop:
-         * kamera -> Apps Script -> dashboard besar.
-         */
-        kirimFrameKeServer(
-          frame
+      const height =
+        Math.round(
+          video.videoHeight *
+          width /
+          video.videoWidth
         );
 
-      },
-      LIVE_INTERVAL
-    );
 
+      canvas.width =
+        width;
+
+      canvas.height =
+        height;
+
+
+      const context =
+        canvas.getContext(
+          "2d"
+        );
+
+
+      context.drawImage(
+        video,
+        0,
+        0,
+        width,
+        height
+      );
+
+
+      /* ===============================
+         JPEG RINGAN
+      =============================== */
+
+      const frame =
+        canvas.toDataURL(
+          "image/jpeg",
+          0.40
+        );
+
+
+      /* ===============================
+         KIRIM KE APPS SCRIPT
+      =============================== */
+
+      fetch(
+        APPS_SCRIPT_URL,
+        {
+          method: "POST",
+          mode: "no-cors",
+          body: JSON.stringify({
+
+            type:
+              "LIVE_FRAME",
+
+            frame:
+              frame,
+
+            latitude:
+              "-7.641230",
+
+            longitude:
+              "112.764780",
+
+            time:
+              Date.now()
+
+          })
+        }
+      ).catch(
+        function(error) {
+
+          console.log(
+            "LIVE error:",
+            error
+          );
+
+        }
+      );
+
+    },
+    1200
+  );
 }
-
 
 /* =========================================================
    AMBIL FOTO
