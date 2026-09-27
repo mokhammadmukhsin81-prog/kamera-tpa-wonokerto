@@ -178,14 +178,14 @@ const LONGITUDE =
 
 /*
  * LIVE ringan:
- * 400 x 225 px
- * maksimal sekitar 2 frame/detik
+ * 320 x 180 px
+ * maksimal sekitar 2-3 frame/detik
  */
 const LIVE_WIDTH =
-  400;
+  320;
 
 const LIVE_INTERVAL =
-  500;
+  350;
 
 
 /* =========================================================
@@ -492,7 +492,7 @@ function buatFrameLive() {
    * Jika masih besar, turunkan lagi.
    */
   let quality =
-    0.42;
+    0.30;
 
   let frame =
     canvas.toDataURL(
@@ -501,11 +501,11 @@ function buatFrameLive() {
     );
 
   while (
-    frame.length > 90000 &&
-    quality > 0.20
+    frame.length > 60000 &&
+    quality > 0.16
   ) {
 
-    quality -= 0.04;
+    quality -= 0.03;
 
     frame =
       canvas.toDataURL(
