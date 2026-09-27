@@ -10,47 +10,55 @@
     content="width=device-width, initial-scale=1"
   >
 
-  <title>Kamera TPA Wonokerto</title>
+  <title>
+    Kamera TPA Wonokerto
+  </title>
 
 
   <style>
 
     * {
-      box-sizing: border-box;
+      box-sizing:
+        border-box;
     }
 
 
     body {
 
-      margin: 0;
+      margin:
+        0;
 
-      padding: 20px;
+      padding:
+        20px;
 
-      background: #111;
+      background:
+        #111;
 
-      color: white;
+      color:
+        white;
 
-      font-family: Arial, sans-serif;
+      font-family:
+        Arial,
+        sans-serif;
 
     }
 
 
     .container {
 
-      max-width: 700px;
+      max-width:
+        800px;
 
-      margin: auto;
+      margin:
+        auto;
 
     }
 
 
     h1 {
 
-      text-align: center;
-
-      font-size: 24px;
-
-      margin-bottom: 20px;
+      text-align:
+        center;
 
     }
 
@@ -58,136 +66,147 @@
     select,
     button {
 
-      width: 100%;
+      width:
+        100%;
 
-      padding: 14px;
+      padding:
+        15px;
 
-      margin-top: 12px;
+      margin-top:
+        12px;
 
-      border-radius: 8px;
+      border:
+        0;
 
-      border: 0;
+      border-radius:
+        10px;
 
-      font-size: 16px;
+      font-size:
+        17px;
 
     }
 
 
     select {
 
-      background: white;
+      background:
+        white;
 
-      color: #111;
+      color:
+        black;
 
     }
 
 
     button {
 
-      background: #1976d2;
+      background:
+        #1976d2;
 
-      color: white;
+      color:
+        white;
 
-      font-weight: bold;
-
-      cursor: pointer;
-
-    }
-
-
-    button:disabled {
-
-      background: #555;
-
-      cursor: not-allowed;
+      font-weight:
+        bold;
 
     }
 
 
     #capture {
 
-      background: #2e7d32;
+      background:
+        #2e7d32;
+
+    }
+
+
+    #capture:disabled {
+
+      background:
+        #555;
 
     }
 
 
     video {
 
-      display: block;
+      width:
+        100%;
 
-      width: 100%;
+      max-height:
+        65vh;
 
-      max-height: 70vh;
+      object-fit:
+        contain;
 
-      object-fit: contain;
+      background:
+        black;
 
-      background: black;
+      border-radius:
+        10px;
 
-      border-radius: 10px;
-
-      margin-top: 15px;
+      margin-top:
+        15px;
 
     }
 
 
     canvas {
 
-      display: none;
+      width:
+        100%;
+
+      background:
+        black;
+
+      border-radius:
+        10px;
+
+      margin-top:
+        15px;
+
+      display:
+        none;
 
     }
 
 
     #status {
 
-      margin-top: 15px;
+      margin-top:
+        15px;
 
-      padding: 12px;
+      padding:
+        15px;
 
-      background: #222;
+      background:
+        #222;
 
-      border-radius: 8px;
+      border-radius:
+        10px;
 
-      text-align: center;
-
-      line-height: 1.5;
+      text-align:
+        center;
 
     }
 
 
     #location {
 
-      margin-top: 10px;
+      margin-top:
+        10px;
 
-      padding: 10px;
+      padding:
+        12px;
 
-      background: #222;
+      background:
+        #222;
 
-      border-radius: 8px;
+      border-radius:
+        10px;
 
-      text-align: center;
-
-      color: #ccc;
-
-      font-size: 14px;
-
-      line-height: 1.5;
-
-    }
-
-
-    .stamp-info {
-
-      margin-top: 12px;
-
-      padding: 12px;
-
-      background: #1c1c1c;
-
-      border-radius: 8px;
-
-      font-size: 14px;
-
-      line-height: 1.5;
+      text-align:
+        center;
 
     }
 
@@ -207,35 +226,21 @@
   </h1>
 
 
-  <!-- =================================================
-       PILIH KAMERA
-       ================================================= -->
-
   <select id="cameraSelect">
 
     <option value="">
-      Memuat kamera...
+      Memilih kamera...
     </option>
 
   </select>
 
 
-  <!-- =================================================
-       BUKA KAMERA
-       ================================================= -->
-
-  <button
-    id="openCamera"
-    type="button">
+  <button id="openCamera">
 
     🎥 BUKA KAMERA
 
   </button>
 
-
-  <!-- =================================================
-       VIDEO
-       ================================================= -->
 
   <video
     id="video"
@@ -244,13 +249,8 @@
   </video>
 
 
-  <!-- =================================================
-       AMBIL FOTO
-       ================================================= -->
-
   <button
     id="capture"
-    type="button"
     disabled>
 
     📷 AMBIL FOTO
@@ -258,16 +258,8 @@
   </button>
 
 
-  <!-- =================================================
-       CANVAS
-       ================================================= -->
-
   <canvas id="canvas"></canvas>
 
-
-  <!-- =================================================
-       STATUS
-       ================================================= -->
 
   <div id="status">
 
@@ -276,46 +268,11 @@
   </div>
 
 
-  <!-- =================================================
-       KOORDINAT
-       ================================================= -->
-
   <div id="location">
 
-    📍
-    Koordinat tetap TPA Wonokerto:
-    <br>
-
-    -7.641230, 112.764780
-
-  </div>
-
-
-  <!-- =================================================
-       INFO STAMP
-       ================================================= -->
-
-  <div class="stamp-info">
-
-    📌 Foto akan diberi stamp:
-
-    <br>
-
-    <b>TPA WONOKERTO</b>
-
-    <br>
-
-    Latitude:
-    <b>-7.641230</b>
-
-    <br>
-
-    Longitude:
-    <b>112.764780</b>
-
-    <br>
-
-    Tanggal dan waktu pengambilan foto
+    📍 Lokasi tetap:
+    -7.641230,
+    112.764780
 
   </div>
 
@@ -323,51 +280,23 @@
 </div>
 
 
-
 <script>
 
 
-/* =====================================================
-   VARIABEL
-   ===================================================== */
+/* =========================================================
+   KONSTANTA LOKASI
+   ========================================================= */
+
+const LATITUDE =
+  -7.641230;
+
+const LONGITUDE =
+  112.764780;
 
 
-let stream = null;
-
-
-/* =====================================================
-   KOORDINAT TETAP TPA WONOKERTO
-   ===================================================== */
-
-const FIXED_LATITUDE =
-  "-7.641230";
-
-
-const FIXED_LONGITUDE =
-  "112.764780";
-
-
-
-/* =====================================================
-   RETURN URL
-   ===================================================== */
-
-const params =
-  new URLSearchParams(
-    window.location.search
-  );
-
-
-const returnUrl =
-  params.get(
-    "returnUrl"
-  );
-
-
-
-/* =====================================================
+/* =========================================================
    ELEMENT
-   ===================================================== */
+   ========================================================= */
 
 const cameraSelect =
   document.getElementById(
@@ -411,61 +340,21 @@ const locationText =
   );
 
 
-
-/* =====================================================
-   CEK BROWSER
-   ===================================================== */
-
-function cekKameraBrowser() {
-
-  if (
-    !navigator.mediaDevices ||
-    !navigator.mediaDevices.getUserMedia
-  ) {
-
-    status.innerText =
-      "❌ Browser tidak mendukung akses kamera.";
-
-    return false;
-
-  }
-
-  return true;
-
-}
+let stream =
+  null;
 
 
-
-/* =====================================================
+/* =========================================================
    DAFTAR KAMERA
-   ===================================================== */
+   ========================================================= */
 
 async function daftarKamera() {
 
-
-  if (!cekKameraBrowser()) {
-
-    return;
-
-  }
-
-
   try {
 
-
-    status.innerText =
-      "⏳ Meminta izin kamera...";
-
-
-    /*
-     * Meminta izin kamera terlebih dahulu.
-     *
-     * Ini diperlukan agar browser
-     * memberikan nama perangkat kamera.
-     */
-
     const temporaryStream =
-      await navigator.mediaDevices
+      await navigator
+        .mediaDevices
         .getUserMedia({
 
           video: true,
@@ -474,11 +363,6 @@ async function daftarKamera() {
 
         });
 
-
-    /*
-     * Kamera sementara langsung
-     * dimatikan.
-     */
 
     temporaryStream
       .getTracks()
@@ -491,12 +375,9 @@ async function daftarKamera() {
       );
 
 
-    /*
-     * Ambil daftar kamera.
-     */
-
     const devices =
-      await navigator.mediaDevices
+      await navigator
+        .mediaDevices
         .enumerateDevices();
 
 
@@ -515,7 +396,7 @@ async function daftarKamera() {
 
 
     defaultOption.textContent =
-      "Pilih kamera";
+      "Memilih kamera...";
 
 
     cameraSelect.appendChild(
@@ -529,7 +410,6 @@ async function daftarKamera() {
 
     devices.forEach(
       function(device) {
-
 
         if (
           device.kind !==
@@ -568,50 +448,15 @@ async function daftarKamera() {
     );
 
 
-    const jumlahKamera =
-      devices.filter(
-        function(device) {
-
-          return (
-            device.kind ===
-            "videoinput"
-          );
-
-        }
-      ).length;
-
-
-    if (jumlahKamera === 0) {
-
-      status.innerText =
-        "❌ Tidak ada kamera ditemukan.";
-
-      return;
-
-    }
-
-
     status.innerText =
-      "✅ " +
-      jumlahKamera +
-      " kamera ditemukan. Silakan pilih kamera.";
+      "Silakan pilih kamera.";
 
   }
 
-
-  catch (error) {
-
-
-    console.error(
-      "Gagal daftar kamera:",
-      error
-    );
-
+  catch(error) {
 
     status.innerText =
-      "❌ Kamera ditolak / tidak dapat diakses: " +
-      error.name +
-      " - " +
+      "❌ Kamera ditolak: " +
       error.message;
 
   }
@@ -619,35 +464,14 @@ async function daftarKamera() {
 }
 
 
-
-/* =====================================================
+/* =========================================================
    BUKA KAMERA
-   ===================================================== */
+   ========================================================= */
 
 openCamera.onclick =
   async function() {
 
-
-    if (
-      !cekKameraBrowser()
-    ) {
-
-      return;
-
-    }
-
-
-    const deviceId =
-      cameraSelect.value;
-
-
     try {
-
-
-      /*
-       * Matikan stream lama
-       * jika ada.
-       */
 
       if (stream) {
 
@@ -661,19 +485,12 @@ openCamera.onclick =
             }
           );
 
-        stream =
-          null;
-
       }
 
 
-      /*
-       * Jika kamera dipilih,
-       * gunakan kamera tersebut.
-       *
-       * Jika belum memilih,
-       * gunakan kamera belakang.
-       */
+      const deviceId =
+        cameraSelect.value;
+
 
       const constraints = {
 
@@ -695,10 +512,7 @@ openCamera.onclick =
             : {
 
                 facingMode:
-                  {
-                    ideal:
-                      "environment"
-                  }
+                  "environment"
 
               },
 
@@ -708,14 +522,6 @@ openCamera.onclick =
       };
 
 
-      status.innerText =
-        "⏳ Membuka kamera...";
-
-
-      /*
-       * Buka kamera.
-       */
-
       stream =
         await navigator
           .mediaDevices
@@ -724,83 +530,30 @@ openCamera.onclick =
           );
 
 
-      /*
-       * Hubungkan kamera
-       * ke video.
-       */
-
       video.srcObject =
         stream;
 
-
-      /*
-       * Pastikan video berjalan.
-       */
-
-      try {
-
-        await video.play();
-
-      }
-
-      catch (e) {
-
-        console.log(
-          "Video play:",
-          e
-        );
-
-      }
-
-
-      /*
-       * Aktifkan tombol foto.
-       */
 
       capture.disabled =
         false;
 
 
       status.innerText =
-        "✅ Kamera aktif. Silakan arahkan kamera lalu tekan AMBIL FOTO.";
+        "✅ Kamera aktif. Silakan ambil foto.";
 
 
-      /*
-       * Koordinat tidak mengambil
-       * GPS perangkat.
-       */
-
-      locationText.innerHTML =
-
-        "📍 <b>KOORDINAT TETAP TPA WONOKERTO</b>" +
-        "<br>" +
-        "Latitude: " +
-        FIXED_LATITUDE +
-        "<br>" +
-        "Longitude: " +
-        FIXED_LONGITUDE;
-
+      locationText.innerText =
+        "📍 Stamp lokasi: " +
+        LATITUDE +
+        ", " +
+        LONGITUDE;
 
     }
 
-
-    catch (error) {
-
-
-      console.error(
-        "Gagal membuka kamera:",
-        error
-      );
-
-
-      capture.disabled =
-        true;
-
+    catch(error) {
 
       status.innerText =
         "❌ Kamera gagal dibuka: " +
-        error.name +
-        " - " +
         error.message;
 
     }
@@ -808,13 +561,15 @@ openCamera.onclick =
   };
 
 
+/* =========================================================
+   FUNGSI STAMP FOTO
+   ========================================================= */
 
-/* =====================================================
-   FORMAT TANGGAL DAN WAKTU
-   ===================================================== */
-
-function formatTanggalWaktu() {
-
+function buatStamp(
+  context,
+  width,
+  height
+) {
 
   const sekarang =
     new Date();
@@ -825,84 +580,234 @@ function formatTanggalWaktu() {
       "id-ID",
       {
 
-        day: "2-digit",
+        day:
+          "2-digit",
 
-        month: "2-digit",
+        month:
+          "2-digit",
 
-        year: "numeric"
+        year:
+          "numeric"
 
       }
     );
 
 
-  const waktu =
+  const jam =
     sekarang.toLocaleTimeString(
       "id-ID",
       {
 
-        hour: "2-digit",
+        hour:
+          "2-digit",
 
-        minute: "2-digit",
+        minute:
+          "2-digit",
 
-        second: "2-digit",
-
-        hour12: false
+        second:
+          "2-digit"
 
       }
     );
 
 
-  return (
+  const baris1 =
+    "TPA WONOKERTO";
+
+
+  const baris2 =
     tanggal +
     " " +
-    waktu
+    jam;
+
+
+  const baris3 =
+    "Lat: " +
+    LATITUDE.toFixed(6);
+
+
+  const baris4 =
+    "Lng: " +
+    LONGITUDE.toFixed(6);
+
+
+  const padding =
+    Math.max(
+      15,
+      Math.round(
+        width * 0.015
+      )
+    );
+
+
+  const fontSize =
+    Math.max(
+      18,
+      Math.round(
+        width * 0.025
+      )
+    );
+
+
+  const lineHeight =
+    Math.round(
+      fontSize * 1.35
+    );
+
+
+  const tinggiKotak =
+    padding * 2 +
+    lineHeight * 4;
+
+
+  const lebarKotak =
+    Math.min(
+      width - padding * 2,
+      Math.round(
+        width * 0.55
+      )
+    );
+
+
+  const x =
+    padding;
+
+
+  const y =
+    height -
+    tinggiKotak -
+    padding;
+
+
+  /*
+   * Kotak hitam transparan
+   */
+
+  context.fillStyle =
+    "rgba(0,0,0,0.72)";
+
+
+  context.fillRect(
+    x,
+    y,
+    lebarKotak,
+    tinggiKotak
+  );
+
+
+  /*
+   * Garis putih tipis
+   */
+
+  context.strokeStyle =
+    "rgba(255,255,255,0.9)";
+
+
+  context.lineWidth =
+    2;
+
+
+  context.strokeRect(
+    x,
+    y,
+    lebarKotak,
+    tinggiKotak
+  );
+
+
+  /*
+   * Teks stamp
+   */
+
+  context.fillStyle =
+    "#ffffff";
+
+
+  context.font =
+    "bold " +
+    fontSize +
+    "px Arial";
+
+
+  context.textBaseline =
+    "top";
+
+
+  context.fillText(
+    baris1,
+    x + padding,
+    y + padding
+  );
+
+
+  context.font =
+    fontSize +
+    "px Arial";
+
+
+  context.fillText(
+    baris2,
+    x + padding,
+    y +
+    padding +
+    lineHeight
+  );
+
+
+  context.fillText(
+    baris3,
+    x + padding,
+    y +
+    padding +
+    lineHeight * 2
+  );
+
+
+  context.fillText(
+    baris4,
+    x + padding,
+    y +
+    padding +
+    lineHeight * 3
   );
 
 }
 
 
-
-/* =====================================================
+/* =========================================================
    AMBIL FOTO
-   ===================================================== */
+   ========================================================= */
 
 capture.onclick =
   function() {
 
-
-    /*
-     * Pastikan kamera aktif.
-     */
-
     if (!stream) {
 
-      status.innerText =
-        "❌ Kamera belum dibuka.";
+      alert(
+        "Kamera belum dibuka."
+      );
 
       return;
 
     }
 
 
-    /*
-     * Ambil ukuran asli video.
-     */
-
-    const width =
+    const videoWidth =
       video.videoWidth;
 
 
-    const height =
+    const videoHeight =
       video.videoHeight;
 
 
     if (
-      !width ||
-      !height
+      !videoWidth ||
+      !videoHeight
     ) {
 
-      status.innerText =
-        "❌ Kamera belum siap. Tunggu beberapa detik lalu coba lagi.";
+      alert(
+        "Kamera belum siap."
+      );
 
       return;
 
@@ -910,9 +815,40 @@ capture.onclick =
 
 
     /*
-     * Atur ukuran canvas
-     * sama dengan foto kamera.
+     * Batasi ukuran foto
+     * supaya pengiriman ke
+     * Apps Script lebih aman.
      */
+
+    const maxWidth =
+      1280;
+
+
+    let width =
+      videoWidth;
+
+
+    let height =
+      videoHeight;
+
+
+    if (
+      width >
+      maxWidth
+    ) {
+
+      height =
+        Math.round(
+          height *
+          maxWidth /
+          width
+        );
+
+      width =
+        maxWidth;
+
+    }
+
 
     canvas.width =
       width;
@@ -929,332 +865,123 @@ capture.onclick =
 
 
     /*
-     * Gambar foto kamera
-     * ke canvas.
+     * GAMBAR FOTO ASLI
      */
 
     context.drawImage(
-
       video,
-
       0,
-
       0,
-
       width,
-
       height
-
     );
 
 
-    /* =================================================
-       STAMP FOTO
-       ================================================= */
-
-
-    const tanggalWaktu =
-      formatTanggalWaktu();
-
-
     /*
-     * Ukuran tulisan menyesuaikan
-     * resolusi foto.
+     * GAMBAR STAMP
      */
 
-    const fontSize =
-      Math.max(
-
-        22,
-
-        Math.round(
-          width *
-          0.028
-        )
-
-      );
-
-
-    const padding =
-      Math.round(
-        fontSize *
-        0.7
-      );
-
-
-    const lineHeight =
-      Math.round(
-        fontSize *
-        1.35
-      );
-
-
-    /*
-     * Tiga baris:
-     *
-     * TPA WONOKERTO
-     * Lat / Long
-     * Waktu
-     */
-
-    const stampHeight =
-      padding * 2 +
-      lineHeight * 3;
-
-
-    /*
-     * Background stamp.
-     */
-
-    context.fillStyle =
-      "rgba(0, 0, 0, 0.72)";
-
-
-    context.fillRect(
-
-      0,
-
-      height -
-        stampHeight,
-
+    buatStamp(
+      context,
       width,
-
-      stampHeight
-
+      height
     );
 
 
     /*
-     * Warna tulisan.
+     * TAMPILKAN HASIL STAMP
      */
 
-    context.fillStyle =
-      "#ffffff";
+    canvas.style.display =
+      "block";
 
 
     /*
-     * Font.
+     * KONVERSI KE JPEG
      */
-
-    context.font =
-      "bold " +
-      fontSize +
-      "px Arial";
-
-
-    context.textAlign =
-      "left";
-
-
-    context.textBaseline =
-      "top";
-
-
-    const x =
-      padding;
-
-
-    const y =
-      height -
-      stampHeight +
-      padding;
-
-
-    /*
-     * BARIS 1
-     */
-
-    context.fillText(
-
-      "TPA WONOKERTO",
-
-      x,
-
-      y
-
-    );
-
-
-    /*
-     * BARIS 2
-     */
-
-    context.fillText(
-
-      "Lat: " +
-      FIXED_LATITUDE +
-      "   Long: " +
-      FIXED_LONGITUDE,
-
-      x,
-
-      y +
-      lineHeight
-
-    );
-
-
-    /*
-     * BARIS 3
-     */
-
-    context.fillText(
-
-      "Waktu: " +
-      tanggalWaktu,
-
-      x,
-
-      y +
-      lineHeight * 2
-
-    );
-
-
-    /* =================================================
-       KONVERSI KE JPEG
-       ================================================= */
-
 
     const foto =
       canvas.toDataURL(
-
         "image/jpeg",
-
-        0.82
-
+        0.78
       );
-
-
-    /*
-     * Pastikan hasil foto
-     * benar-benar ada.
-     */
-
-    if (
-      !foto ||
-      foto.length < 100
-    ) {
-
-      status.innerText =
-        "❌ Foto gagal dibuat.";
-
-      return;
-
-    }
 
 
     status.innerText =
-      "⏳ Foto + stamp sedang dikirim ke Input V2...";
+      "⏳ Foto sudah distamp. Mengirim ke Input V2...";
 
 
-    /* =================================================
-       CARI HALAMAN INPUT V2
-       ================================================= */
-
-
-    const target =
-      window.opener;
-
+    /*
+     * CEK OPENER
+     */
 
     if (
-      !target ||
-      target.closed
+      !window.opener ||
+      window.opener.closed
     ) {
 
       status.innerText =
-        "❌ Halaman Input V2 tidak ditemukan. Buka kamera dari tombol BUKA KAMERA di Input V2.";
+        "❌ Input V2 tidak ditemukan. Jangan membuka kamera langsung. Buka kamera dari tombol Input V2.";
 
       return;
 
     }
 
 
-    /* =================================================
-       KIRIM FOTO KE INPUT V2
-       ================================================= */
+    /*
+     * KIRIM KE INPUT V2
+     */
+
+    window.opener.postMessage(
+
+      {
+
+        type:
+          "KAMERA_TPA_RESULT",
 
 
-    try {
+        foto: {
 
-
-      target.postMessage(
-
-        {
+          data:
+            foto,
 
           type:
-            "KAMERA_TPA_RESULT",
+            "image/jpeg",
 
-
-          foto: {
-
-            data:
-              foto,
-
-            type:
-              "image/jpeg",
-
-            nama:
-              "FOTO-TPA-" +
-              Date.now() +
-              ".jpg"
-
-          },
-
-
-          koordinat: {
-
-            latitude:
-              FIXED_LATITUDE,
-
-            longitude:
-              FIXED_LONGITUDE,
-
-            accuracy:
-              ""
-
-          }
+          nama:
+            "BUKTI-TPA-" +
+            Date.now() +
+            ".jpg"
 
         },
 
-        "*"
 
-      );
+        koordinat: {
 
+          latitude:
+            LATITUDE,
 
-      status.innerText =
-        "✅ Foto + stamp berhasil dikirim ke Input V2.";
+          longitude:
+            LONGITUDE
 
+        }
 
-    }
+      },
 
+      "*"
 
-    catch (error) {
-
-
-      console.error(
-        "Gagal postMessage:",
-        error
-      );
+    );
 
 
-      status.innerText =
-        "❌ Gagal mengirim foto ke Input V2: " +
-        error.message;
+    status.innerText =
+      "✅ FOTO SUDAH DISTAMP DAN DIKIRIM KE INPUT V2.";
 
 
-      return;
-
-    }
-
-
-    /* =================================================
-       MATIKAN KAMERA
-       ================================================= */
-
+    /*
+     * Matikan kamera
+     */
 
     if (stream) {
-
 
       stream
         .getTracks()
@@ -1266,89 +993,37 @@ capture.onclick =
           }
         );
 
-
-      stream =
-        null;
-
     }
 
 
-    video.srcObject =
-      null;
-
-
-    capture.disabled =
-      true;
-
-
-    /* =================================================
-       TUTUP WINDOW KAMERA
-       ================================================= */
+    /*
+     * Beri waktu postMessage
+     * diterima sebelum menutup
+     */
 
     setTimeout(
-
       function() {
 
         window.close();
 
       },
-
-      800
-
+      1000
     );
 
   };
 
 
-
-/* =====================================================
-   SAAT HALAMAN DITUTUP
-   ===================================================== */
-
-window.addEventListener(
-  "beforeunload",
-  function() {
-
-
-    if (stream) {
-
-
-      stream
-        .getTracks()
-        .forEach(
-          function(track) {
-
-            track.stop();
-
-          }
-        );
-
-
-      stream =
-        null;
-
-    }
-
-  }
-);
-
-
-
-/* =====================================================
-   MULAI
-   ===================================================== */
+/* =========================================================
+   START
+   ========================================================= */
 
 window.addEventListener(
   "load",
-  function() {
-
-    daftarKamera();
-
-  }
+  daftarKamera
 );
 
-
 </script>
+
 
 </body>
 
