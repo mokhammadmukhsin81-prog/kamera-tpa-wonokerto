@@ -641,73 +641,100 @@ async function bukaKamera() {
 function mulaiLive() {
 
   if (liveTimer) {
-
-    clearInterval(
-      liveTimer
-    );
-
+    clearInterval(liveTimer);
   }
 
+  liveTimer = setInterval(function() {
 
-  liveTimer =
-    setInterval(
-      function() {
+    if (!stream) {
+      return;
+    }
 
-        if (!stream) {
-          return;
-        }
+    if (
+      !video.videoWidth ||
+      !video.videoHeight
+    ) {
+      return;
+    }
 
+    // ================================
+    // LIVE RINGAN
+    // ================================
 
-        if (
-          !video.videoWidth ||
-          !video.videoHeight
-        ) {
+    const width = 360;
 
-          return;
+    const height =
+      Math.round(
+        video.videoHeight *
+        width /
+        video.videoWidth
+      );
 
-        }
+    canvas.width = width;
+    canvas.height = height;
 
+    const context =
+      canvas.getContext("2d", {
+        alpha: false
+      });
 
-        const width =
-          640;
+    context.drawImage(
+      video,
+      0,
+      0,
+      width,
+      height
+    );
 
+    // JPEG kecil untuk LIVE
+    const frame =
+      canvas.toDataURL(
+        "image/jpeg",
+        0.40
+      );
 
-        const height =
-          Math.round(
-            video.videoHeight *
-            width /
-            video.videoWidth
-          );
+    try {
 
+      if (
+        window.opener &&
+        !window.opener.closed
+      ) {
 
-        canvas.width =
-          width;
+        window.opener.postMessage(
 
-        canvas.height =
-          height;
+          {
+            type: "KAMERA_LIVE_FRAME",
 
+            frame: frame,
 
-        const context =
-          canvas.getContext(
-            "2d"
-          );
+            latitude: latitude,
 
+            longitude: longitude,
 
-        context.drawImage(
-          video,
-          0,
-          0,
-          width,
-          height
+            waktu: Date.now()
+
+          },
+
+          "*"
+
         );
 
+      }
 
-        const frame =
-          canvas.toDataURL(
-            "image/jpeg",
-            0.55
-          );
+    }
 
+    catch(error) {
+
+      console.log(
+        "Gagal mengirim frame:",
+        error
+      );
+
+    }
+
+  }, 120);
+
+}
 
         kirimKeDashboard({
 
