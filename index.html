@@ -55,10 +55,12 @@
       background: #1976d2;
       color: white;
       font-weight: bold;
+      cursor: pointer;
     }
 
     button:disabled {
       background: #555;
+      cursor: not-allowed;
     }
 
     #capture {
@@ -96,6 +98,7 @@
       text-align: center;
       color: #ddd;
       font-size: 14px;
+      line-height: 1.6;
     }
 
   </style>
@@ -151,7 +154,7 @@
 
 
   <div id="location">
-    📍 Koordinat belum tersedia
+    📍 Lokasi TPA belum ditampilkan.
   </div>
 
 
@@ -162,16 +165,43 @@
 
 
 /* =========================================================
-   VARIABEL
+   KOORDINAT TETAP TPA WONOKERTO
+   ========================================================= */
+
+const FIXED_LATITUDE =
+  -7.641230;
+
+
+const FIXED_LONGITUDE =
+  112.764780;
+
+
+/*
+ * Bukan hasil pengukuran GPS.
+ * Karena lokasi ditetapkan secara tetap.
+ */
+
+const FIXED_ACCURACY =
+  "";
+
+
+/* =========================================================
+   VARIABEL KAMERA
    ========================================================= */
 
 let stream = null;
 
-let latitude = "";
 
-let longitude = "";
+let latitude =
+  FIXED_LATITUDE;
 
-let accuracy = "";
+
+let longitude =
+  FIXED_LONGITUDE;
+
+
+let accuracy =
+  FIXED_ACCURACY;
 
 
 /* =========================================================
@@ -221,20 +251,12 @@ const locationText =
 
 
 /* =========================================================
-   FORMAT ANGKA
+   FORMAT KOORDINAT
    ========================================================= */
 
-function formatKoordinat(value) {
-
-  if (
-    value === "" ||
-    value === null ||
-    value === undefined
-  ) {
-
-    return "-";
-
-  }
+function formatKoordinat(
+  value
+) {
 
   return Number(value)
     .toFixed(6);
@@ -243,18 +265,19 @@ function formatKoordinat(value) {
 
 
 /* =========================================================
-   FORMAT TANGGAL
+   FORMAT TANGGAL DAN JAM
    ========================================================= */
 
-function formatTanggalWaktu(date) {
+function formatTanggalWaktu(
+  date
+) {
 
-  const pad =
-    function(number) {
+  function pad(number) {
 
-      return String(number)
-        .padStart(2, "0");
+    return String(number)
+      .padStart(2, "0");
 
-    };
+  }
 
 
   return (
@@ -279,13 +302,56 @@ function formatTanggalWaktu(date) {
 
 
 /* =========================================================
+   TAMPILKAN LOKASI TETAP
+   ========================================================= */
+
+function tampilkanLokasi() {
+
+  latitude =
+    FIXED_LATITUDE;
+
+
+  longitude =
+    FIXED_LONGITUDE;
+
+
+  accuracy =
+    FIXED_ACCURACY;
+
+
+  locationText.innerHTML =
+
+    "📍 <b>LOKASI TPA WONOKERTO</b>" +
+
+    "<br>" +
+
+    "Latitude: " +
+    formatKoordinat(
+      latitude
+    ) +
+
+    "<br>" +
+
+    "Longitude: " +
+    formatKoordinat(
+      longitude
+    ) +
+
+    "<br>" +
+
+    "Lokasi: Tetap";
+
+
+}
+
+
+/* =========================================================
    DAFTAR KAMERA
    ========================================================= */
 
 async function daftarKamera() {
 
   try {
-
 
     status.innerText =
       "⏳ Meminta izin kamera...";
@@ -363,9 +429,11 @@ async function daftarKamera() {
 
         nomor++;
 
-
       }
     );
+
+
+    tampilkanLokasi();
 
 
     status.innerText =
@@ -376,11 +444,9 @@ async function daftarKamera() {
 
   catch(error) {
 
-
     status.innerText =
       "❌ Kamera tidak dapat diakses: " +
       error.message;
-
 
   }
 
@@ -404,7 +470,6 @@ openCamera.onclick =
 
       if (stream) {
 
-
         stream
           .getTracks()
           .forEach(
@@ -414,7 +479,6 @@ openCamera.onclick =
 
             }
           );
-
 
       }
 
@@ -465,134 +529,24 @@ openCamera.onclick =
         false;
 
 
+      tampilkanLokasi();
+
+
       status.innerText =
-        "✅ Kamera aktif. Mengambil lokasi GPS...";
-
-
-      ambilLokasi();
+        "✅ Kamera aktif. Lokasi TPA sudah ditetapkan. Silakan ambil foto.";
 
 
     }
 
     catch(error) {
 
-
       status.innerText =
         "❌ Kamera gagal dibuka: " +
         error.message;
 
-
     }
 
-
   };
-
-
-/* =========================================================
-   GPS
-   ========================================================= */
-
-function ambilLokasi() {
-
-
-  if (
-    !navigator.geolocation
-  ) {
-
-
-    locationText.innerText =
-      "📍 GPS tidak tersedia.";
-
-
-    return;
-
-  }
-
-
-  navigator.geolocation
-    .getCurrentPosition(
-
-      function(position) {
-
-
-        latitude =
-          position.coords.latitude;
-
-
-        longitude =
-          position.coords.longitude;
-
-
-        accuracy =
-          position.coords.accuracy;
-
-
-        locationText.innerHTML =
-
-          "📍 Latitude: " +
-          formatKoordinat(latitude) +
-
-          "<br>" +
-
-          "Longitude: " +
-          formatKoordinat(longitude) +
-
-          "<br>" +
-
-          "Akurasi: ±" +
-          Math.round(accuracy) +
-          " meter";
-
-
-        status.innerText =
-          "✅ Kamera dan GPS aktif. Silakan ambil foto.";
-
-
-      },
-
-
-      function(error) {
-
-
-        latitude =
-          "";
-
-
-        longitude =
-          "";
-
-
-        accuracy =
-          "";
-
-
-        locationText.innerText =
-          "📍 GPS tidak diizinkan / belum tersedia.";
-
-
-        status.innerText =
-          "⚠️ Kamera aktif. Foto tetap dapat diambil, tetapi koordinat tidak tersedia.";
-
-
-      },
-
-
-      {
-
-        enableHighAccuracy:
-          true,
-
-        timeout:
-          15000,
-
-        maximumAge:
-          0
-
-      }
-
-    );
-
-}
 
 
 /* =========================================================
@@ -620,7 +574,8 @@ function stampFoto(
 
 
   /*
-   * Ukuran stamp mengikuti ukuran foto.
+   * Ukuran tulisan mengikuti
+   * resolusi foto.
    */
 
   const ukuranDasar =
@@ -654,23 +609,15 @@ function stampFoto(
 
     "LAT : " +
       formatKoordinat(
-        latitude
+        FIXED_LATITUDE
       ),
 
     "LON : " +
       formatKoordinat(
-        longitude
+        FIXED_LONGITUDE
       ),
 
-    "AKURASI : ±" +
-      (
-        accuracy !== ""
-          ? Math.round(
-              accuracy
-            )
-          : "-"
-      ) +
-      " m"
+    "LOKASI : TETAP"
 
   ];
 
@@ -747,7 +694,6 @@ function stampFoto(
     }
   );
 
-
 }
 
 
@@ -761,10 +707,8 @@ capture.onclick =
 
     if (!stream) {
 
-
       status.innerText =
         "❌ Kamera belum dibuka.";
-
 
       return;
 
@@ -784,10 +728,8 @@ capture.onclick =
       !height
     ) {
 
-
       status.innerText =
         "❌ Kamera belum siap.";
-
 
       return;
 
@@ -795,7 +737,24 @@ capture.onclick =
 
 
     /*
-     * Pastikan video benar-benar aktif.
+     * Pastikan koordinat tetap.
+     */
+
+    latitude =
+      FIXED_LATITUDE;
+
+
+    longitude =
+      FIXED_LONGITUDE;
+
+
+    accuracy =
+      FIXED_ACCURACY;
+
+
+    /*
+     * Ukuran canvas sama dengan
+     * ukuran video.
      */
 
     canvas.width =
@@ -832,7 +791,7 @@ capture.onclick =
 
 
     /*
-     * Waktu foto.
+     * Waktu pengambilan foto.
      */
 
     const tanggal =
@@ -850,7 +809,7 @@ capture.onclick =
 
 
     /*
-     * JPEG hasil akhir.
+     * Buat JPEG hasil akhir.
      */
 
     const foto =
@@ -865,7 +824,8 @@ capture.onclick =
 
 
     /*
-     * Cari halaman InputV2.
+     * InputV2 dibuka sebagai
+     * window induk.
      */
 
     const target =
@@ -877,10 +837,8 @@ capture.onclick =
       target.closed
     ) {
 
-
       status.innerText =
         "❌ Input V2 tidak ditemukan. Buka kamera dari Input V2.";
-
 
       return;
 
@@ -888,7 +846,7 @@ capture.onclick =
 
 
     /*
-     * Kirim foto + koordinat.
+     * Kirim foto ke InputV2.
      */
 
     target.postMessage(
@@ -918,26 +876,22 @@ capture.onclick =
         koordinat: {
 
           latitude:
-            latitude,
+            FIXED_LATITUDE,
 
           longitude:
-            longitude,
+            FIXED_LONGITUDE,
 
           accuracy:
-            accuracy
+            FIXED_ACCURACY
 
         }
 
       },
 
-      "https://script.google.com"
+      "*"
 
     );
 
-
-    /*
-     * Pesan berhasil.
-     */
 
     status.innerText =
       "✅ Foto sudah diberi stamp dan dikirim ke Input V2.";
@@ -967,12 +921,12 @@ capture.onclick =
 
 
     /*
-     * Tutup halaman kamera.
+     * Tutup halaman kamera
+     * setelah foto terkirim.
      */
 
     setTimeout(
       function() {
-
 
         try {
 
@@ -988,11 +942,9 @@ capture.onclick =
 
         }
 
-
       },
       800
     );
-
 
   };
 
