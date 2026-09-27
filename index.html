@@ -19,139 +19,174 @@
     }
 
     body {
+
       margin: 0;
+
       padding: 20px;
+
       background: #08263a;
+
       color: white;
+
       font-family: Arial, sans-serif;
+
     }
+
 
     .container {
-      width: 100%;
+
       max-width: 700px;
+
       margin: auto;
+
     }
+
 
     h1 {
+
       text-align: center;
-      font-size: 28px;
-      margin: 5px 0 20px;
+
+      font-size: 26px;
+
     }
 
-    .subtitle {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 18px;
-    }
 
     select,
     button {
+
       width: 100%;
-      min-height: 55px;
-      padding: 12px;
+
+      padding: 15px;
+
       margin-top: 12px;
-      border-radius: 10px;
-      border: none;
+
+      border-radius: 8px;
+
+      border: 0;
+
       font-size: 17px;
+
     }
+
 
     select {
+
       background: white;
+
       color: #111;
+
     }
+
 
     button {
+
+      background: #198754;
+
       color: white;
+
       font-weight: bold;
+
       cursor: pointer;
+
     }
+
 
     button:disabled {
-      opacity: .5;
-      cursor: not-allowed;
+
+      background: #555;
+
     }
 
-    #openCamera {
-      background: #168f5a;
-    }
 
     #capture {
-      background: #e93683;
+
+      background: #e83e8c;
+
     }
+
 
     #retake {
-      background: #f2ad00;
+
+      background: #f0ad00;
+
     }
 
-    #closeCamera {
-      background: #777;
-    }
-
-    video,
-    #photoPreview {
-      display: block;
-      width: 100%;
-      margin-top: 15px;
-      background: #000;
-      border-radius: 12px;
-    }
 
     video {
-      max-height: 70vh;
+
+      display: block;
+
+      width: 100%;
+
+      height: 470px;
+
       object-fit: contain;
+
+      background: black;
+
+      border-radius: 10px;
+
+      margin-top: 15px;
+
     }
 
-    #photoPreview {
-      display: none;
-    }
 
     canvas {
+
       display: none;
+
     }
 
-    .status {
+
+    #status {
+
       margin-top: 15px;
+
       padding: 15px;
-      border-radius: 10px;
-      background: #f0f6fa;
+
+      background: #e9f2fa;
+
       color: #123;
-      font-size: 17px;
-      line-height: 1.5;
+
+      border-radius: 8px;
+
+      text-align: center;
+
     }
 
-    .location {
-      margin-top: 15px;
+
+    #location {
+
+      margin-top: 10px;
+
       padding: 15px;
-      border-radius: 10px;
-      background: #edf9ed;
-      color: #145c24;
-      font-size: 16px;
+
+      background: #e9f8e7;
+
+      color: #146b2e;
+
+      border-radius: 8px;
+
       line-height: 1.6;
+
     }
 
-    .buttons {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
 
-    .buttons button {
-      margin-top: 12px;
-    }
+    #photoPreview {
 
-    @media (max-width: 600px) {
+      width: 100%;
 
-      body {
-        padding: 12px;
-      }
+      max-height: 470px;
 
-      h1 {
-        font-size: 23px;
-      }
+      object-fit: contain;
 
-      .buttons {
-        grid-template-columns: 1fr;
-      }
+      background: black;
+
+      border-radius: 10px;
+
+      margin-top: 15px;
+
+      display: none;
 
     }
 
@@ -170,14 +205,6 @@
     📷 KAMERA BUKTI PENDUKUNG
   </h1>
 
-  <div class="subtitle">
-    TPA WONOKERTO
-  </div>
-
-
-  <!-- =========================
-       PILIH KAMERA
-       ========================= -->
 
   <select id="cameraSelect">
 
@@ -188,32 +215,38 @@
   </select>
 
 
-  <!-- =========================
-       BUKA KAMERA
-       ========================= -->
-
   <button
     id="openCamera"
   >
-    📷 BUKA KAMERA
+    🎥 BUKA KAMERA
   </button>
 
-
-  <!-- =========================
-       VIDEO
-       ========================= -->
 
   <video
     id="video"
     autoplay
-    playsinline
-    muted
-  ></video>
+    playsinline>
+  </video>
 
 
-  <!-- =========================
-       FOTO HASIL
-       ========================= -->
+  <button
+    id="capture"
+    disabled
+  >
+    📷 AMBIL FOTO
+  </button>
+
+
+  <button
+    id="retake"
+    disabled
+  >
+    🔄 AMBIL ULANG
+  </button>
+
+
+  <canvas id="canvas"></canvas>
+
 
   <img
     id="photoPreview"
@@ -221,82 +254,13 @@
   >
 
 
-  <!-- =========================
-       TOMBOL
-       ========================= -->
-
-  <div class="buttons">
-
-    <button
-      id="capture"
-      disabled
-    >
-      📷 AMBIL FOTO
-    </button>
-
-    <button
-      id="retake"
-      disabled
-    >
-      🔄 AMBIL ULANG
-    </button>
-
-  </div>
-
-
-  <button
-    id="closeCamera"
-    disabled
-  >
-    ✖ TUTUP KAMERA
-  </button>
-
-
-  <!-- =========================
-       CANVAS
-       ========================= -->
-
-  <canvas id="canvas"></canvas>
-
-
-  <!-- =========================
-       STATUS
-       ========================= -->
-
-  <div
-    id="status"
-    class="status"
-  >
+  <div id="status">
     Kamera belum dibuka.
   </div>
 
 
-  <!-- =========================
-       LOKASI
-       ========================= -->
-
-  <div
-    id="location"
-    class="location"
-  >
-
-    📍 <b>KOORDINAT</b>
-
-    <br>
-
-    Latitude:
-    <span id="latitude">-</span>
-
-    <br>
-
-    Longitude:
-    <span id="longitude">-</span>
-
-    <br>
-
-    Akurasi:
-    <span id="accuracy">-</span>
-
+  <div id="location">
+    📍 Koordinat belum tersedia
   </div>
 
 
@@ -305,680 +269,533 @@
 
 <script>
 
+  let stream = null;
 
-/* =========================================================
-   VARIABEL
-   ========================================================= */
+  let latitude = "";
 
-let stream = null;
+  let longitude = "";
 
-let fotoSudahDiambil = false;
+  let accuracy = "";
 
-let latitude = "";
 
-let longitude = "";
-
-let accuracy = "";
-
-
-/* =========================================================
-   PARAMETER
-   ========================================================= */
-
-const params =
-  new URLSearchParams(
-    window.location.search
-  );
-
-
-/*
- * InputV2 akan membuka halaman ini
- * dengan:
- *
- * ?return=inputv2
- *
- * Parameter ini hanya sebagai penanda.
- */
-
-const returnPage =
-  params.get("return");
-
-
-/* =========================================================
-   ELEMENT
-   ========================================================= */
-
-const cameraSelect =
-  document.getElementById(
-    "cameraSelect"
-  );
-
-const openCamera =
-  document.getElementById(
-    "openCamera"
-  );
-
-const capture =
-  document.getElementById(
-    "capture"
-  );
-
-const retake =
-  document.getElementById(
-    "retake"
-  );
-
-const closeCamera =
-  document.getElementById(
-    "closeCamera"
-  );
-
-const video =
-  document.getElementById(
-    "video"
-  );
-
-const canvas =
-  document.getElementById(
-    "canvas"
-  );
-
-const photoPreview =
-  document.getElementById(
-    "photoPreview"
-  );
-
-const status =
-  document.getElementById(
-    "status"
-  );
-
-const latitudeEl =
-  document.getElementById(
-    "latitude"
-  );
-
-const longitudeEl =
-  document.getElementById(
-    "longitude"
-  );
-
-const accuracyEl =
-  document.getElementById(
-    "accuracy"
-  );
-
-
-/* =========================================================
-   STATUS
-   ========================================================= */
-
-function setStatus(text) {
-
-  status.innerText =
-    text;
-
-}
-
-
-/* =========================================================
-   STOP CAMERA
-   ========================================================= */
-
-function stopCamera() {
-
-  if (!stream) {
-    return;
-  }
-
-  stream
-    .getTracks()
-    .forEach(
-      function(track) {
-        track.stop();
-      }
-    );
-
-  stream = null;
-
-  video.srcObject =
-    null;
-
-  capture.disabled =
-    true;
-
-  closeCamera.disabled =
-    true;
-
-}
-
-
-/* =========================================================
-   DAFTAR KAMERA
-   ========================================================= */
-
-async function daftarKamera() {
-
-  if (
-    !navigator.mediaDevices ||
-    !navigator.mediaDevices.getUserMedia
-  ) {
-
-    setStatus(
-      "❌ Browser tidak mendukung akses kamera."
-    );
-
-    return;
-
-  }
-
-
-  try {
-
-    /*
-     * Minta izin sekali.
-     */
-
-    const temporaryStream =
-      await navigator.mediaDevices
-        .getUserMedia({
-          video: true,
-          audio: false
-        });
-
-
-    /*
-     * Setelah izin didapat,
-     * matikan stream sementara.
-     */
-
-    temporaryStream
-      .getTracks()
-      .forEach(
-        function(track) {
-          track.stop();
-        }
-      );
-
-
-    /*
-     * Ambil daftar kamera.
-     */
-
-    const devices =
-      await navigator.mediaDevices
-        .enumerateDevices();
-
-
-    cameraSelect.innerHTML =
-      "";
-
-
-    const defaultOption =
-      document.createElement(
-        "option"
-      );
-
-    defaultOption.value =
-      "";
-
-    defaultOption.textContent =
-      "Pilih kamera";
-
-    cameraSelect.appendChild(
-      defaultOption
+  const cameraSelect =
+    document.getElementById(
+      "cameraSelect"
     );
 
 
-    let nomor =
-      1;
-
-
-    devices.forEach(
-      function(device) {
-
-        if (
-          device.kind !==
-          "videoinput"
-        ) {
-          return;
-        }
-
-
-        const option =
-          document.createElement(
-            "option"
-          );
-
-
-        option.value =
-          device.deviceId;
-
-
-        option.textContent =
-          device.label ||
-          "Kamera " +
-          nomor;
-
-
-        cameraSelect.appendChild(
-          option
-        );
-
-
-        nomor++;
-
-      }
+  const openCamera =
+    document.getElementById(
+      "openCamera"
     );
 
 
-    if (
-      cameraSelect.options.length <= 1
-    ) {
-
-      setStatus(
-        "❌ Tidak ada kamera yang ditemukan."
-      );
-
-      return;
-
-    }
-
-
-    /*
-     * Pilih kamera pertama
-     * secara otomatis.
-     */
-
-    cameraSelect.selectedIndex =
-      1;
-
-
-    setStatus(
-      "✅ Kamera tersedia. Tekan BUKA KAMERA."
+  const capture =
+    document.getElementById(
+      "capture"
     );
 
-  }
 
-  catch(error) {
-
-    console.error(error);
-
-    setStatus(
-      "❌ Izin kamera ditolak atau kamera tidak dapat diakses: " +
-      error.name +
-      " - " +
-      error.message
+  const retake =
+    document.getElementById(
+      "retake"
     );
 
-  }
 
-}
+  const video =
+    document.getElementById(
+      "video"
+    );
 
 
-/* =========================================================
-   BUKA KAMERA
-   ========================================================= */
+  const canvas =
+    document.getElementById(
+      "canvas"
+    );
 
-openCamera.onclick =
-  async function() {
+
+  const photoPreview =
+    document.getElementById(
+      "photoPreview"
+    );
+
+
+  const status =
+    document.getElementById(
+      "status"
+    );
+
+
+  const locationBox =
+    document.getElementById(
+      "location"
+    );
+
+
+  /* =====================================================
+     DAFTAR KAMERA
+     ===================================================== */
+
+  async function daftarKamera() {
 
     try {
 
       /*
-       * Tutup stream sebelumnya.
+       * Jangan langsung meminta kamera
+       * ketika halaman dibuka.
+       *
+       * Kamera baru diminta ketika
+       * user klik BUKA KAMERA.
        */
 
-      stopCamera();
-
-
-      let deviceId =
-        cameraSelect.value;
-
-
-      /*
-       * Jika belum memilih kamera,
-       * gunakan kamera belakang.
-       */
-
-      let constraints;
-
-
-      if (deviceId) {
-
-        constraints = {
-
-          video: {
-            deviceId: {
-              exact: deviceId
-            }
-          },
-
-          audio: false
-
-        };
-
-      }
-
-      else {
-
-        constraints = {
-
-          video: {
-            facingMode: {
-              ideal: "environment"
-            }
-          },
-
-          audio: false
-
-        };
-
-      }
-
-
-      setStatus(
-        "⏳ Membuka kamera..."
-      );
-
-
-      stream =
+      const devices =
         await navigator.mediaDevices
-          .getUserMedia(
-            constraints
+          .enumerateDevices();
+
+
+      cameraSelect.innerHTML =
+        '<option value="">Pilih kamera</option>';
+
+
+      let nomor = 1;
+
+
+      devices.forEach(
+        function(device) {
+
+          if (
+            device.kind !==
+            "videoinput"
+          ) {
+
+            return;
+
+          }
+
+
+          const option =
+            document.createElement(
+              "option"
+            );
+
+
+          option.value =
+            device.deviceId;
+
+
+          option.textContent =
+            device.label ||
+            "Kamera " +
+            nomor;
+
+
+          cameraSelect.appendChild(
+            option
           );
 
 
-      video.srcObject =
-        stream;
+          nomor++;
 
-
-      await video.play();
-
-
-      capture.disabled =
-        false;
-
-      closeCamera.disabled =
-        false;
-
-
-      setStatus(
-        "✅ Kamera aktif. Arahkan kamera lalu tekan AMBIL FOTO."
+        }
       );
 
 
-      /*
-       * Ambil lokasi bersamaan
-       * dengan kamera.
-       */
-
-      ambilLokasi();
+      status.innerText =
+        "Silakan klik BUKA KAMERA.";
 
     }
 
     catch(error) {
 
-      console.error(error);
-
-      capture.disabled =
-        true;
-
-      setStatus(
-        "❌ Kamera gagal dibuka: " +
-        error.name +
-        " - " +
-        error.message
-      );
+      status.innerText =
+        "❌ Gagal membaca kamera: " +
+        error.message;
 
     }
-
-  };
-
-
-/* =========================================================
-   LOKASI
-   ========================================================= */
-
-function ambilLokasi() {
-
-  if (
-    !navigator.geolocation
-  ) {
-
-    latitude = "";
-    longitude = "";
-    accuracy = "";
-
-    latitudeEl.innerText =
-      "-";
-
-    longitudeEl.innerText =
-      "-";
-
-    accuracyEl.innerText =
-      "GPS tidak tersedia";
-
-    return;
 
   }
 
 
-  latitudeEl.innerText =
-    "Mengambil...";
+  /* =====================================================
+     BUKA KAMERA
+     ===================================================== */
 
-  longitudeEl.innerText =
-    "Mengambil...";
+  openCamera.onclick =
+    async function() {
 
-  accuracyEl.innerText =
-    "Mengambil...";
+      try {
+
+        /*
+         * Hentikan stream lama
+         */
+
+        if (stream) {
+
+          stream
+            .getTracks()
+            .forEach(
+              track =>
+                track.stop()
+            );
+
+        }
 
 
-  navigator.geolocation
-    .getCurrentPosition(
-
-      function(position) {
-
-        latitude =
-          position.coords.latitude;
-
-        longitude =
-          position.coords.longitude;
-
-        accuracy =
-          position.coords.accuracy;
+        const deviceId =
+          cameraSelect.value;
 
 
-        latitudeEl.innerText =
-          latitude;
+        let constraints;
 
-        longitudeEl.innerText =
-          longitude;
 
-        accuracyEl.innerText =
-          accuracy +
-          " meter";
+        if (deviceId) {
 
-      },
+          constraints = {
 
-      function(error) {
+            video: {
 
-        console.error(
-          "GPS:",
-          error
+              deviceId: {
+                exact:
+                  deviceId
+              }
+
+            },
+
+            audio: false
+
+          };
+
+        }
+
+        else {
+
+          /*
+           * Utamakan kamera belakang
+           * untuk HP.
+           */
+
+          constraints = {
+
+            video: {
+
+              facingMode: {
+                ideal:
+                  "environment"
+              },
+
+              width: {
+                ideal: 1920
+              },
+
+              height: {
+                ideal: 1080
+              }
+
+            },
+
+            audio: false
+
+          };
+
+        }
+
+
+        status.innerText =
+          "⏳ Meminta izin kamera...";
+
+
+        stream =
+          await navigator
+            .mediaDevices
+            .getUserMedia(
+              constraints
+            );
+
+
+        video.srcObject =
+          stream;
+
+
+        await video.play();
+
+
+        capture.disabled =
+          false;
+
+
+        retake.disabled =
+          true;
+
+
+        status.innerText =
+          "✅ Kamera aktif. Silakan AMBIL FOTO.";
+
+
+        /*
+         * Setelah izin berhasil,
+         * sekarang label kamera
+         * bisa diperoleh.
+         */
+
+        const devices =
+          await navigator.mediaDevices
+            .enumerateDevices();
+
+
+        cameraSelect.innerHTML =
+          '<option value="">Pilih kamera</option>';
+
+
+        let nomor = 1;
+
+
+        devices.forEach(
+          function(device) {
+
+            if (
+              device.kind !==
+              "videoinput"
+            ) {
+
+              return;
+
+            }
+
+
+            const option =
+              document.createElement(
+                "option"
+              );
+
+
+            option.value =
+              device.deviceId;
+
+
+            option.textContent =
+              device.label ||
+              "Kamera " +
+              nomor;
+
+
+            if (
+              device.deviceId ===
+              deviceId
+            ) {
+
+              option.selected =
+                true;
+
+            }
+
+
+            cameraSelect.appendChild(
+              option
+            );
+
+
+            nomor++;
+
+          }
         );
 
 
-        latitude =
-          "";
-
-        longitude =
-          "";
-
-        accuracy =
-          "";
-
-
-        latitudeEl.innerText =
-          "-";
-
-        longitudeEl.innerText =
-          "-";
-
-        accuracyEl.innerText =
-          "Lokasi tidak diizinkan";
-
-
-      },
-
-      {
-
-        enableHighAccuracy:
-          true,
-
-        timeout:
-          15000,
-
-        maximumAge:
-          0
+        ambilLokasi();
 
       }
 
-    );
+      catch(error) {
 
-}
-
-
-/* =========================================================
-   AMBIL FOTO
-   ========================================================= */
-
-capture.onclick =
-  function() {
-
-    if (!stream) {
-
-      alert(
-        "Kamera belum dibuka."
-      );
-
-      return;
-
-    }
+        console.error(error);
 
 
-    if (
-      !video.videoWidth ||
-      !video.videoHeight
-    ) {
+        status.innerText =
+          "❌ Kamera gagal dibuka: " +
+          error.name +
+          " - " +
+          error.message;
 
-      alert(
-        "Kamera belum siap. Tunggu beberapa detik."
-      );
+      }
 
-      return;
-
-    }
+    };
 
 
-    const width =
-      video.videoWidth;
+  /* =====================================================
+     LOKASI
+     ===================================================== */
 
-    const height =
-      video.videoHeight;
-
-
-    canvas.width =
-      width;
-
-    canvas.height =
-      height;
-
-
-    const context =
-      canvas.getContext(
-        "2d"
-      );
-
-
-    context.drawImage(
-      video,
-      0,
-      0,
-      width,
-      height
-    );
-
-
-    /*
-     * JPEG dikompres supaya
-     * pengiriman ke Apps Script
-     * tidak terlalu besar.
-     */
-
-    const foto =
-      canvas.toDataURL(
-        "image/jpeg",
-        0.82
-      );
-
-
-    /*
-     * Tampilkan preview.
-     */
-
-    photoPreview.src =
-      foto;
-
-    photoPreview.style.display =
-      "block";
-
-
-    fotoSudahDiambil =
-      true;
-
-
-    retake.disabled =
-      false;
-
-
-    setStatus(
-      "⏳ Foto berhasil diambil. Mengirim ke InputV2..."
-    );
-
-
-    /*
-     * Kirim ke window pembuka.
-     *
-     * InputV2 membuka halaman ini
-     * menggunakan window.open().
-     */
-
-    const target =
-      window.opener;
-
+  function ambilLokasi() {
 
     if (
-      !target ||
-      target.closed
+      !navigator.geolocation
     ) {
 
-      setStatus(
-        "❌ InputV2 tidak ditemukan. Buka kamera dari tombol BUKA KAMERA di InputV2."
-      );
+      locationBox.innerText =
+        "📍 GPS tidak tersedia.";
 
       return;
 
     }
 
 
-    /*
-     * Data foto + koordinat.
-     */
+    locationBox.innerText =
+      "📍 Mengambil koordinat...";
 
-    target.postMessage(
 
-      {
+    navigator.geolocation
+      .getCurrentPosition(
+
+        function(position) {
+
+          latitude =
+            position.coords.latitude;
+
+          longitude =
+            position.coords.longitude;
+
+          accuracy =
+            position.coords.accuracy;
+
+
+          locationBox.innerHTML =
+
+            "📍 <b>KOORDINAT</b><br>" +
+
+            "Latitude: " +
+            latitude +
+            "<br>" +
+
+            "Longitude: " +
+            longitude +
+            "<br>" +
+
+            "Akurasi: ±" +
+            accuracy +
+            " meter";
+
+        },
+
+        function(error) {
+
+          console.error(error);
+
+
+          locationBox.innerText =
+            "📍 Lokasi tidak dapat diperoleh: " +
+            error.message;
+
+        },
+
+        {
+
+          enableHighAccuracy:
+            true,
+
+          timeout:
+            15000,
+
+          maximumAge:
+            0
+
+        }
+
+      );
+
+  }
+
+
+  /* =====================================================
+     AMBIL FOTO
+     ===================================================== */
+
+  capture.onclick =
+    function() {
+
+      if (!stream) {
+
+        alert(
+          "Kamera belum dibuka."
+        );
+
+        return;
+
+      }
+
+
+      const width =
+        video.videoWidth;
+
+
+      const height =
+        video.videoHeight;
+
+
+      if (
+        !width ||
+        !height
+      ) {
+
+        alert(
+          "Kamera belum siap. Tunggu beberapa detik."
+        );
+
+        return;
+
+      }
+
+
+      canvas.width =
+        width;
+
+
+      canvas.height =
+        height;
+
+
+      const context =
+        canvas.getContext(
+          "2d"
+        );
+
+
+      context.drawImage(
+        video,
+        0,
+        0,
+        width,
+        height
+      );
+
+
+      /*
+       * JPEG dikompres agar
+       * tidak terlalu besar
+       */
+
+      const foto =
+        canvas.toDataURL(
+          "image/jpeg",
+          0.82
+        );
+
+
+      /*
+       * Tampilkan hasil foto
+       */
+
+      photoPreview.src =
+        foto;
+
+
+      photoPreview.style.display =
+        "block";
+
+
+      /*
+       * Kirim ke InputV2
+       */
+
+      const message = {
 
         type:
           "KAMERA_TPA_RESULT",
@@ -992,7 +809,7 @@ capture.onclick =
             "image/jpeg",
 
           nama:
-            "BUKTI-TPA-" +
+            "BUKTI-" +
             Date.now() +
             ".jpg"
 
@@ -1011,167 +828,163 @@ capture.onclick =
 
         }
 
-      },
-
-      "https://script.google.com"
-
-    );
+      };
 
 
-    /*
-     * Jika target origin di browser
-     * berbeda karena Apps Script memakai
-     * usercode/exec domain, kirim ulang
-     * dengan wildcard sebagai fallback.
-     *
-     * Tidak mengirim data ke server lain;
-     * hanya ke window.opener.
-     */
+      /*
+       * CEK OPENER
+       */
 
-    try {
+      if (
+        !window.opener ||
+        window.opener.closed
+      ) {
 
-      target.postMessage(
+        status.innerText =
+          "❌ InputV2 tidak ditemukan. Pastikan kamera dibuka dari tombol BUKA KAMERA di InputV2.";
 
-        {
+        return;
 
-          type:
-            "KAMERA_TPA_RESULT",
+      }
 
-          foto: {
 
-            data:
-              foto,
+      /*
+       * KIRIM FOTO
+       */
 
-            type:
-              "image/jpeg",
+      try {
 
-            nama:
-              "BUKTI-TPA-" +
-              Date.now() +
-              ".jpg"
+        window.opener.postMessage(
+          message,
+          "*"
+        );
+
+
+        /*
+         * Kirim ulang beberapa kali
+         * supaya lebih tahan terhadap
+         * timing popup.
+         */
+
+        setTimeout(
+          function() {
+
+            try {
+
+              window.opener.postMessage(
+                message,
+                "*"
+              );
+
+            }
+            catch(e) {}
 
           },
-
-          koordinat: {
-
-            latitude:
-              latitude,
-
-            longitude:
-              longitude,
-
-            accuracy:
-              accuracy
-
-          }
-
-        },
-
-        "*"
-
-      );
-
-    }
-
-    catch(error) {
-
-      console.error(error);
-
-    }
+          300
+        );
 
 
-    setStatus(
-      "✅ Foto sudah dikirim ke InputV2. Silakan kembali ke halaman InputV2."
-    );
+        setTimeout(
+          function() {
+
+            try {
+
+              window.opener.postMessage(
+                message,
+                "*"
+              );
+
+            }
+            catch(e) {}
+
+          },
+          800
+        );
 
 
-    /*
-     * Matikan kamera.
-     */
-
-    stopCamera();
-
-  };
+        status.innerText =
+          "✅ FOTO BERHASIL DIKIRIM KE INPUT V2.";
 
 
-/* =========================================================
-   AMBIL ULANG
-   ========================================================= */
-
-retake.onclick =
-  function() {
-
-    photoPreview.src =
-      "";
-
-    photoPreview.style.display =
-      "none";
+        retake.disabled =
+          false;
 
 
-    fotoSudahDiambil =
-      false;
+        /*
+         * Matikan kamera
+         */
+
+        if (stream) {
+
+          stream
+            .getTracks()
+            .forEach(
+              track =>
+                track.stop()
+            );
+
+        }
 
 
-    retake.disabled =
-      true;
+        capture.disabled =
+          true;
 
 
-    setStatus(
-      "Kamera siap. Tekan BUKA KAMERA untuk mengambil foto lagi."
-    );
+        /*
+         * Jangan langsung window.close().
+         *
+         * Biarkan popup tetap terbuka
+         * agar user bisa melihat bahwa
+         * foto sudah terkirim.
+         */
+
+      }
+
+      catch(error) {
+
+        console.error(error);
+
+        status.innerText =
+          "❌ Gagal mengirim foto: " +
+          error.message;
+
+      }
+
+    };
 
 
-    openCamera.click();
+  /* =====================================================
+     AMBIL ULANG
+     ===================================================== */
 
-  };
+  retake.onclick =
+    function() {
 
+      photoPreview.style.display =
+        "none";
 
-/* =========================================================
-   TUTUP KAMERA
-   ========================================================= */
+      capture.disabled =
+        true;
 
-closeCamera.onclick =
-  function() {
-
-    stopCamera();
-
-    setStatus(
-      "Kamera ditutup."
-    );
-
-  };
+      retake.disabled =
+        true;
 
 
-/* =========================================================
-   SAAT HALAMAN DITUTUP
-   ========================================================= */
+      openCamera.click();
 
-window.addEventListener(
-  "beforeunload",
-  function() {
-
-    stopCamera();
-
-  }
-);
+    };
 
 
-/* =========================================================
-   START
-   ========================================================= */
+  /* =====================================================
+     MULAI
+     ===================================================== */
 
-window.addEventListener(
-  "load",
-  function() {
-
-    daftarKamera();
-
-  }
-);
-
+  window.addEventListener(
+    "load",
+    daftarKamera
+  );
 
 </script>
-
 
 </body>
 
