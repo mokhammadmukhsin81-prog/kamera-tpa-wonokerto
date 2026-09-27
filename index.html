@@ -693,44 +693,36 @@ function mulaiLive() {
         0.40
       );
 
-    try {
+try {
 
-      if (
-        window.opener &&
-        !window.opener.closed
-      ) {
-
-        window.opener.postMessage(
-
-          {
-            type: "KAMERA_LIVE_FRAME",
-
-            frame: frame,
-
-            latitude: latitude,
-
-            longitude: longitude,
-
-            waktu: Date.now()
-
-          },
-
-          "*"
-
-        );
-
-      }
-
-    }
-
-    catch(error) {
+  google.script.run
+    .withFailureHandler(function(error) {
 
       console.log(
-        "Gagal mengirim frame:",
+        "Gagal mengirim LIVE:",
         error
       );
 
-    }
+    })
+    .simpanLiveFrame({
+
+      frame: frame,
+
+      latitude: latitude,
+
+      longitude: longitude
+
+    });
+
+}
+catch(error) {
+
+  console.log(
+    "Gagal mengirim LIVE:",
+    error
+  );
+
+}
 
   }, 120);
 
